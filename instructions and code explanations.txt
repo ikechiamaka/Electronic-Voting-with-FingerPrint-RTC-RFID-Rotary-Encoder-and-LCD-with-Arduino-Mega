@@ -1,0 +1,35 @@
+**********************************CODE EXPLANATIONS*********************************************
+
+The Arduino-based voting system code manages the various hardware components and provides an interactive user interface for enrolling voters, casting votes, and checking results. Here's an overview of the main sections of the code:
+
+Include Libraries and Initialization: At the beginning of the code, you will find the necessary libraries being included, such as Wire, LiquidCrystal_I2C, MFRC522, etc. These libraries enable communication and interaction with the various hardware components. You will also find global variables, object declarations, and constants being initialized.
+
+Setup Function: The setup() function is called once at the beginning of the program. It initializes the communication with the hardware components, such as the LCD, RFID reader, fingerprint sensor, and real-time clock. It also sets up the input pins for the rotary encoder and configures the initial state of the user interface.
+
+Loop Function: The loop() function is the core of the program and runs continuously. It is responsible for detecting input from the rotary encoder and navigating through the menu system accordingly. When a menu option is selected, it calls the appropriate function to perform the desired action (enrolling a voter, casting a vote, or checking results).
+
+Menu Navigation Functions: Functions such as updateMenu() handle the menu navigation and display the appropriate text on the LCD screen based on the current menu and submenu options.
+
+Enrolling Voters: The enrollFingerprint() function handles the process of enrolling a new voter. It prompts the user to place their finger on the fingerprint sensor and stores the scanned fingerprint in the system for future identification.
+
+Casting Votes: The castVote() function is responsible for allowing voters to cast their votes using their fingerprint or an RFID card. It validates the voter's identity and records the vote.
+
+Checking Results: The checkResults() function displays the current voting results. It can be accessed by authorized personnel using a Master RFID card or a pre-defined Master Fingerprint.
+
+The code is structured in a modular fashion, with each function serving a specific purpose. This makes it easier to understand, customize, and maintain the voting system. To customize the code for your specific requirements, you can modify the functions and variables as needed.
+
+
+
+*******************************INSTRUCTIONS**********************************************
+1. i provided to circuit diagrams and their corresponding codes, one is with arduino uno and the other is with arduino mega, i would recommend using the arduino mega because of memory reasons, i encounter so many issues with using the uno because the code was very lengthy and demanded alot of memory, so please use the mega.
+
+
+2. you might need external power source for the peripheral input devices, the RFID and fingerprint module both require 3.3v to operate and the encoder, rtc, and lcd all require 5v to operate. so i would recommend using external power sources for the 5v devices but ensure to make the whole system use a common ground.
+
+3. the code is really lengthy but if there is anything you dont understand in it please let me know and i will explain, they have their corresponding comments aswell. 
+
+4. the documentation is also attached in this delivery and it explains everything from start to finish.
+
+
+if you encounter any issues please do not hesitate to reach out and i will answer ASAP SIR.
+thank you so much for the opportunity, i sincerely appreciate sir.
