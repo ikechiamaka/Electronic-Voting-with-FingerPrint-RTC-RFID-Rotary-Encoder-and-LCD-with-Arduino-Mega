@@ -3,6 +3,8 @@
 #include <LiquidCrystal_I2C.h>
 #include <Adafruit_Fingerprint.h>
 #include <SoftwareSerial.h>
+#include <LowPower.h>
+
 
 #include <MFRC522.h>
 #define Buzzer ""
@@ -24,6 +26,7 @@ LiquidCrystal_I2C lcd(0x27, 20, 4);
 // Initialize the DS3231 RTC module
 RTC_DS3231 rtc;
 
+const unsigned long sleepInterval = 60000;  // 1 minute (60,000 milliseconds)
 
 
 String AP = "Galaxy A1217D2";
@@ -212,7 +215,27 @@ void loop() {
  
     displayingDateTime = true;
   }
+  // Check if the device should enter sleep mode
+  if (millis() - lastInteraction > sleepInterval) {
+    enterSleepMode();
+  }
 }
+
+void enterSleepMode() {
+  lcd.clear();
+  lcd.noBacklight();  // Turn off the LCD backlight
+  lcd.noDisplay();    // Turn off the LCD display
+
+  // Put the device into sleep mode for the specified interval
+  LowPower.idle(SLEEP_1S, ADC_OFF, TIMER2_OFF, TIMER1_OFF, TIMER0_OFF, SPI_OFF, USART0_OFF, TWI_OFF);
+
+  lcd.display();      // Turn on the LCD display
+  lcd.backlight();    // Turn on the LCD backlight
+
+  lastInteraction = millis();  // Update the last interaction timestamp
+  updateMenu();               // Refresh the menu
+}
+
 
 float readBatteryVoltage() {
   float voltage = analogRead(batteryPin) * (5.0 / 1023.0);
